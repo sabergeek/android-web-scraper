@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WebScraper</string>
+    <string name="tenth_character">Tenth Character:\n\n</string>
+    <string name="every_tenth_character">Every Tenth Character:\n\n</string>
+    <string name="all_words_and_their_repetition_count">All Words And Their Repetition Count:\n\n</string>
+    <string name="repetition">" repetition \n\n"</string>
+</resources>
