@@ -25,8 +25,8 @@ class Interactor(private val repo: Repository) : ViewModel() {
         return liveData
     }
 
-    suspend fun scrapeAllWordsAndTheirRepetitionCount(): MutableLiveData<Outcome<Map<String, Int>>> {
-        val liveData = MutableLiveData<Outcome<Map<String, Int>>>()
+    suspend fun scrapeAllWordsAndTheirRepetitionCount(): MutableLiveData<Outcome<List<Pair<String, Int>>>> {
+        val liveData = MutableLiveData<Outcome<List<Pair<String, Int>>>>()
         viewModelScope.launch {
             liveData.postValue(repo.scrapeAllWordsAndTheirRepetitionCount().value)
         }

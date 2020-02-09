@@ -45,9 +45,9 @@ class Repository {
         return liveData
     }
 
-    suspend fun scrapeAllWordsAndTheirRepetitionCount(): MutableLiveData<Outcome<Map<String, Int>>> {
+    suspend fun scrapeAllWordsAndTheirRepetitionCount(): MutableLiveData<Outcome<List<Pair<String, Int>>>> {
 
-        val liveData = MutableLiveData<Outcome<Map<String, Int>>>()
+        val liveData = MutableLiveData<Outcome<List<Pair<String, Int>>>>()
 
         withContext(Dispatchers.IO) {
             try {
@@ -63,6 +63,6 @@ class Repository {
 
     companion object {
         private const val TARGET_URL =
-            "https://truecaller.blog/2018/01/22/life-as-an-android-engineer/"
+            "https://truecaller.blog/2018/01/22/life-as-an-android-engineer"
     }
 }

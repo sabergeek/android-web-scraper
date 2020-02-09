@@ -12,7 +12,8 @@ class BusinessLogic {
         }
     }
 
-    fun getAllWordsAndRepetitionCount(target: String): Map<String, Int> {
-        return target.split("\\s+".toRegex()).toList().groupingBy { it }.eachCount().filter { it.value > 0 }
+    fun getAllWordsAndRepetitionCount(target: String): List<Pair<String, Int>> {
+
+        return target.split("\\s+".toRegex()).toList().groupingBy { it }.eachCount().filter { it.value > 0 }.toList()
     }
 }
