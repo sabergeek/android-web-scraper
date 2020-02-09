@@ -1,5 +1,6 @@
 ### Approach
 
+- Please note that, the solution to 3 problems have been rendered on the UI and divided using a horizontal divider. I've deliberately not labelled them to keep things simple.
 - The URLs have been scraped using JSOUP. It's a simple library that does that job.
 - The UI contains two textViews for single results each, and one recyclerview for a large blob of list. The recyclerview has been chosen to avoid blocking the UI and only render data according to the current scroll position.
 - I've used fast-list to quickly inflate a functional recyclerview.
