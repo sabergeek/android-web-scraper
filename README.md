@@ -1,6 +1,6 @@
 ### Approach
 
-- Supported devices - API 21 and above.
+- Supported devices - API 21 (Android 5.0, Lollipop) and above.
 - Please note the solution to 3 problems are rendered (exactly in sequence as the questions provide in the PDF) on the UI, and divided using a horizontal divider.
 - The URLs have been scraped using JSOUP. It's a simple library that does that job.
 - The UI contains two textViews for single results each, and one recyclerview for a large blob of list. The recyclerview has been chosen to avoid blocking the UI and only render data according to the current scroll position.
