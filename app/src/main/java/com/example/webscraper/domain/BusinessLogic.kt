@@ -3,7 +3,11 @@ package com.example.webscraper.domain
 class BusinessLogic {
 
     fun getTenthCharacter(target: String): String {
-        return target[10].toString()
+        return if (target.length > 10) {
+            target[10].toString()
+        } else {
+            "string too short"
+        }
     }
 
     fun getEveryTenthCharacter(target: String): String {
@@ -13,6 +17,11 @@ class BusinessLogic {
     }
 
     fun getAllWordsAndRepetitionCount(target: String): List<Pair<String, Int>> {
-        return target.split("\\s+".toRegex()).toList().groupingBy { it }.eachCount().filter { it.value > 0 }.toList()
+        return if (target.length > 10) {
+            target.split("\\s+".toRegex()).toList().groupingBy { it }.eachCount()
+                .filter { it.value > 0 }.toList()
+        } else {
+            listOf(Pair("string too short", 0))
+        }
     }
 }
