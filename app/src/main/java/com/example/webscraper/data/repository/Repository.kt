@@ -1,10 +1,7 @@
 package com.example.webscraper.data.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.example.webscraper.interactor.BusinessLogic
-import com.example.webscraper.utilities.Failure
-import com.example.webscraper.utilities.Outcome
-import com.example.webscraper.utilities.Success
+import com.example.webscraper.domain.BusinessLogic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
@@ -13,56 +10,59 @@ class Repository {
 
     private val businessLogic = BusinessLogic()
 
-    suspend fun scrapeTenthCharacter(): MutableLiveData<Outcome<String>> {
-        val liveData = MutableLiveData<Outcome<String>>()
+    private val liveDataForTenthCharacter = MutableLiveData<Outcome<String>>()
+    private val liveDataForEveryTenthCharacter = MutableLiveData<Outcome<String>>()
+    private val liveDataForAllWordsAndTheirRepetitionCount = MutableLiveData<Outcome<List<Pair<String, Int>>>>()
 
+    suspend fun scrapeTenthCharacter(forceNetworkCall: Boolean = false): MutableLiveData<Outcome<String>> =
         withContext(Dispatchers.IO) {
             try {
-                val document = Jsoup.connect(TARGET_URL).get()
-                val result = businessLogic.getTenthCharacter(document.toString())
-                liveData.postValue(Success(result))
+                if (forceNetworkCall || liveDataForTenthCharacter.value == null){
+                    val document = Jsoup.connect(TARGET_URL).get()
+                    val result = businessLogic.getTenthCharacter(document.toString())
+                    liveDataForTenthCharacter.postValue(Success(result))
+                }
             } catch (e: Exception) {
-                liveData.postValue(Failure(e))
+                liveDataForTenthCharacter.postValue(Failure(e))
             }
+            return@withContext liveDataForTenthCharacter
         }
-        return liveData
-    }
 
-    suspend fun scrapeEveryTenthCharacter(): MutableLiveData<Outcome<String>> {
-
-        val liveData = MutableLiveData<Outcome<String>>()
-
+    suspend fun scrapeEveryTenthCharacter(forceNetworkCall: Boolean = false): MutableLiveData<Outcome<String>> =
         withContext(Dispatchers.IO) {
             try {
-                val document = Jsoup.connect(TARGET_URL).get()
-                val result = businessLogic.getEveryTenthCharacter(document.toString())
-                liveData.postValue(Success(result))
-
+                if (forceNetworkCall || liveDataForEveryTenthCharacter.value == null){
+                    val document = Jsoup.connect(TARGET_URL).get()
+                    val result = businessLogic.getEveryTenthCharacter(document.toString())
+                    liveDataForEveryTenthCharacter.postValue(Success(result))
+                }
             } catch (e: Exception) {
-                liveData.postValue(Failure(e))
+                liveDataForEveryTenthCharacter.postValue(
+                    Failure(
+                        e
+                    )
+                )
             }
+            return@withContext liveDataForEveryTenthCharacter
         }
-        return liveData
-    }
 
-    suspend fun scrapeAllWordsAndTheirRepetitionCount(): MutableLiveData<Outcome<List<Pair<String, Int>>>> {
-
-        val liveData = MutableLiveData<Outcome<List<Pair<String, Int>>>>()
-
+    suspend fun scrapeAllWordsAndTheirRepetitionCount(forceNetworkCall: Boolean = false): MutableLiveData<Outcome<List<Pair<String, Int>>>> =
         withContext(Dispatchers.IO) {
             try {
-                val document = Jsoup.connect(TARGET_URL).get()
-                val result = businessLogic.getAllWordsAndRepetitionCount(document.toString())
-                liveData.postValue(Success(result))
+                if (forceNetworkCall || liveDataForAllWordsAndTheirRepetitionCount.value == null){
+                    val document = Jsoup.connect(TARGET_URL).get()
+                    val result = businessLogic.getAllWordsAndRepetitionCount(document.toString())
+                    liveDataForAllWordsAndTheirRepetitionCount.postValue(Success(result))
+                }
             } catch (e: Exception) {
-                liveData.postValue(Failure(e))
+                liveDataForAllWordsAndTheirRepetitionCount.postValue(
+                    Failure(e)
+                )
             }
+            return@withContext liveDataForAllWordsAndTheirRepetitionCount
         }
-        return liveData
-    }
 
     companion object {
-        private const val TARGET_URL =
-            "https://truecaller.blog/2018/01/22/life-as-an-android-engineer"
+        private const val TARGET_URL = "https://en.wikipedia.org/wiki/India"
     }
 }

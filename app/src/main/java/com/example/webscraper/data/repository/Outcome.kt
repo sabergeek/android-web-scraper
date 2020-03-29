@@ -1,4 +1,4 @@
-package com.example.webscraper.utilities
+package com.example.webscraper.data.repository
 
 sealed class Outcome<out T: Any?>
 

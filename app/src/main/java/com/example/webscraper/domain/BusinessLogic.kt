@@ -1,4 +1,4 @@
-package com.example.webscraper.interactor
+package com.example.webscraper.domain
 
 class BusinessLogic {
 
@@ -13,7 +13,6 @@ class BusinessLogic {
     }
 
     fun getAllWordsAndRepetitionCount(target: String): List<Pair<String, Int>> {
-
         return target.split("\\s+".toRegex()).toList().groupingBy { it }.eachCount().filter { it.value > 0 }.toList()
     }
 }
