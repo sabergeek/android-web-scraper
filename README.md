@@ -7,5 +7,6 @@
 - The code design is powered by a view layer, interactor layer (viewModel) and a data layer.
 - Using a sealed class called outcome to cleanly get a success or a failure response in the view layer.
 - The business logic has been separated to a dedicated class
-- For finding words separated by any whitespace with the number of repetitions, i've used kotlin's built-in functions to filter out data. 
+- For finding words separated by any whitespace with the number of repetitions, i've used kotlin's built-in functions to filter out data.
+- The data will persist across screen orientation changes and will only request for an API call if the live data is empty or theres a request to force the network call.
 - Please disconnect from any VPN while running this app. It may cause exception while scraping the URLs.
