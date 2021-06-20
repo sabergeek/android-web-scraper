@@ -1,12 +1,10 @@
-### Approach
+### What the app does
 
-- Supported devices - API 21 (Android 5.0, Lollipop) and above.
-- The URLs have been scraped using JSOUP. It's a simple library that does that job.
-- The UI contains two textViews for single results each, and one recyclerview for a large blob of list. The recyclerview has been chosen to avoid blocking the UI and only render data according to the current scroll position.
-- The project uses fast-list to quickly inflate a functional recyclerview.
-- The code design is powered by a view layer, interactor layer (viewModel) and a data layer.
-- Using a sealed class called outcome to cleanly get a success or a failure response in the view layer.
-- The business logic has been separated to a dedicated class
-- For finding words separated by any whitespace with the number of repetitions, i've used kotlin's built-in functions to filter out data.
+- This a super-simple and bare-bones implementation of web-scraping using JSOUP, and UI rendering with Jetpack Compose.
+- Jetpack Compose is in BETA stage, so this project will only run on Android Studio Arctic Fox.
+- The UI contains a lazy column from Jetpack Compose, an equivalent of RecyclerView for rendering a large blob of list. 
+- The code design is basically a presentation layer (view + viewModel), domain and a data layer.
+- Using a sealed class called 'Outcome' to cleanly return a success or a failure response back to the view layer.
+- Business logic has been separated to a dedicated class.
 - The data will persist across screen orientation changes and will only request for an API call if the live data is empty or theres a request to force the network call.
 - Please disconnect from any VPN while running this app. It may cause exception while scraping the URLs.
